@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.carbon.bid.mapper.BidGoodsMapper">
+    
+    <resultMap type="BidGoods" id="BidGoodsResult">
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="description"    column="description"    />
+        <result property="price"    column="price"    />
+        <result property="endType"    column="end_type"    />
+        <result property="privilege"    column="privilege"    />
+        <result property="pic"    column="pic"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBidGoodsVo">
+        select goods_id, goods_name, description, price, end_type, privilege, pic, create_by, create_time, update_by, update_time from bid_goods
+    </sql>
+
+    <select id="selectBidGoodsList" parameterType="BidGoods" resultMap="BidGoodsResult">
+        <include refid="selectBidGoodsVo"/>
+        <where>  
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="endType != null "> and end_type = #{endType}</if>
+            <if test="privilege != null  and privilege != ''"> and privilege = #{privilege}</if>
+            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+        </where>
+    </select>
+    
+    <select id="selectBidGoodsById" parameterType="Long" resultMap="BidGoodsResult">
+        <include refid="selectBidGoodsVo"/>
+        where goods_id = #{goodsId}
+    </select>
+        
+    <insert id="insertBidGoods" parameterType="BidGoods">
+        insert into bid_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">goods_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="description != null">description,</if>
+            <if test="price != null">price,</if>
+            <if test="endType != null">end_type,</if>
+            <if test="privilege != null">privilege,</if>
+            <if test="pic != null">pic,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="description != null">#{description},</if>
+            <if test="price != null">#{price},</if>
+            <if test="endType != null">#{endType},</if>
+            <if test="privilege != null">#{privilege},</if>
+            <if test="pic != null">#{pic},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBidGoods" parameterType="BidGoods">
+        update bid_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="endType != null">end_type = #{endType},</if>
+            <if test="privilege != null">privilege = #{privilege},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where goods_id = #{goodsId}
+    </update>
+
+    <delete id="deleteBidGoodsById" parameterType="Long">
+        delete from bid_goods where goods_id = #{goodsId}
+    </delete>
+
+    <delete id="deleteBidGoodsByIds" parameterType="String">
+        delete from bid_goods where goods_id in 
+        <foreach item="goodsId" collection="array" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+    </delete>
+</mapper>

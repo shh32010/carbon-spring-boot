@@ -1,0 +1,24 @@
+# Java项目通用忽略规则
+# 编译产物
+target/
+classes/
+build/
+# IDE配置（IDEA/Eclipse）
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.classpath
+.project
+# 日志
+logs/
+*.log
+# Maven/Gradle
+.mvn/
+gradle/
+gradlew
+gradlew.bat
+# 系统文件
+.DS_Store
+Thumbs.db
