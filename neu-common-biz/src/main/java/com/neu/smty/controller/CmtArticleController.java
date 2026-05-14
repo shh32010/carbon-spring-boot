@@ -22,20 +22,20 @@ import com.neu.smty.domain.CmtArticle;
 import com.neu.smty.service.ICmtArticleService;
 
 /**
- * 文章管理Controller
+ * 鏂囩珷绠＄悊Controller
  * 
  * @author neusoft
  * @date 2021-07-11
  */
 @RestController
-@RequestMapping("/cms/article")
+@RequestMapping("/community/post")
 public class CmtArticleController extends BaseController
 {
     @Autowired
     private ICmtArticleService cmtArticleService;
 
     /**
-     * 查询文章管理列表
+     * 鏌ヨ鏂囩珷绠＄悊鍒楄〃
      */
     @PreAuthorize("@ss.hasPermi('cms:article:list')")
     @GetMapping("/list")
@@ -47,10 +47,10 @@ public class CmtArticleController extends BaseController
     }
 
     /**
-     * 导出文章管理列表
+     * 瀵煎嚭鏂囩珷绠＄悊鍒楄〃
      */
     @PreAuthorize("@ss.hasPermi('cms:article:export')")
-    @Log(title = "文章管理", businessType = BusinessType.EXPORT)
+    @Log(title = "鏂囩珷绠＄悊", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(CmtArticle cmtArticle)
     {
@@ -60,7 +60,7 @@ public class CmtArticleController extends BaseController
     }
 
     /**
-     * 获取文章管理详细信息
+     * 鑾峰彇鏂囩珷绠＄悊璇︾粏淇℃伅
      */
     @PreAuthorize("@ss.hasPermi('cms:article:query')")
     @GetMapping(value = "/{id}")
@@ -70,10 +70,10 @@ public class CmtArticleController extends BaseController
     }
 
     /**
-     * 新增文章管理
+     * 鏂板鏂囩珷绠＄悊
      */
     @PreAuthorize("@ss.hasPermi('cms:article:add')")
-    @Log(title = "文章管理", businessType = BusinessType.INSERT)
+    @Log(title = "鏂囩珷绠＄悊", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmtArticle cmtArticle)
     {
@@ -81,10 +81,10 @@ public class CmtArticleController extends BaseController
     }
 
     /**
-     * 修改文章管理
+     * 淇敼鏂囩珷绠＄悊
      */
     @PreAuthorize("@ss.hasPermi('cms:article:edit')")
-    @Log(title = "文章管理", businessType = BusinessType.UPDATE)
+    @Log(title = "鏂囩珷绠＄悊", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmtArticle cmtArticle)
     {
@@ -92,13 +92,14 @@ public class CmtArticleController extends BaseController
     }
 
     /**
-     * 删除文章管理
+     * 鍒犻櫎鏂囩珷绠＄悊
      */
     @PreAuthorize("@ss.hasPermi('cms:article:remove')")
-    @Log(title = "文章管理", businessType = BusinessType.DELETE)
+    @Log(title = "鏂囩珷绠＄悊", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(cmtArticleService.deleteCmtArticleByIds(ids));
     }
 }
+

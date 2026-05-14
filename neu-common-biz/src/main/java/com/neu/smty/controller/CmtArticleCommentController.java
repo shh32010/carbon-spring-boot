@@ -22,20 +22,20 @@ import com.neu.smty.domain.CmtArticleComment;
 import com.neu.smty.service.ICmtArticleCommentService;
 
 /**
- * 文章评论Controller
+ * 鏂囩珷璇勮Controller
  * 
  * @author neusoft
  * @date 2021-07-11
  */
 @RestController
-@RequestMapping("/cms/comment")
+@RequestMapping("/community/post/comment")
 public class CmtArticleCommentController extends BaseController
 {
     @Autowired
     private ICmtArticleCommentService cmtArticleCommentService;
 
     /**
-     * 查询文章评论列表
+     * 鏌ヨ鏂囩珷璇勮鍒楄〃
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:list')")
     @GetMapping("/list")
@@ -47,10 +47,10 @@ public class CmtArticleCommentController extends BaseController
     }
 
     /**
-     * 导出文章评论列表
+     * 瀵煎嚭鏂囩珷璇勮鍒楄〃
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:export')")
-    @Log(title = "文章评论", businessType = BusinessType.EXPORT)
+    @Log(title = "鏂囩珷璇勮", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(CmtArticleComment cmtArticleComment)
     {
@@ -60,7 +60,7 @@ public class CmtArticleCommentController extends BaseController
     }
 
     /**
-     * 获取文章评论详细信息
+     * 鑾峰彇鏂囩珷璇勮璇︾粏淇℃伅
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:query')")
     @GetMapping(value = "/{id}")
@@ -70,10 +70,10 @@ public class CmtArticleCommentController extends BaseController
     }
 
     /**
-     * 新增文章评论
+     * 鏂板鏂囩珷璇勮
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:add')")
-    @Log(title = "文章评论", businessType = BusinessType.INSERT)
+    @Log(title = "鏂囩珷璇勮", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmtArticleComment cmtArticleComment)
     {
@@ -81,10 +81,10 @@ public class CmtArticleCommentController extends BaseController
     }
 
     /**
-     * 修改文章评论
+     * 淇敼鏂囩珷璇勮
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:edit')")
-    @Log(title = "文章评论", businessType = BusinessType.UPDATE)
+    @Log(title = "鏂囩珷璇勮", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmtArticleComment cmtArticleComment)
     {
@@ -92,13 +92,14 @@ public class CmtArticleCommentController extends BaseController
     }
 
     /**
-     * 删除文章评论
+     * 鍒犻櫎鏂囩珷璇勮
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:remove')")
-    @Log(title = "文章评论", businessType = BusinessType.DELETE)
+    @Log(title = "鏂囩珷璇勮", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(cmtArticleCommentService.deleteCmtArticleCommentByIds(ids));
     }
 }
+
